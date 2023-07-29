@@ -10,8 +10,10 @@ public class Generator : MonoBehaviour {
             return health;
         }
         set {
+
             // todo change timescale
             health = value;
+
 		}
     }
 
@@ -23,7 +25,7 @@ public class Generator : MonoBehaviour {
 
     void Update() {
         
-
+        
 
     }
 

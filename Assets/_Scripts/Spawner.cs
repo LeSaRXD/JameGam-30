@@ -5,13 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
 
     public GameObject enemyPrefab;
-    public float timeToSpawn = 0f;
-
-    void Start() {
-        
-
-
-    }
+    [SerializeField]
+    private float timeToSpawn = 10f;
 
     void Update() {
         
@@ -22,15 +17,26 @@ public class Spawner : MonoBehaviour {
 
     void Spawn() {
 
+        GameObject enemy = Instantiate(enemyPrefab);
+
+        enemy.transform.position = new Vector2(
+            Random.Range(this.transform.position.x - this.transform.localScale.x / 2f, this.transform.position.x + this.transform.localScale.x / 2f),
+            Random.Range(this.transform.position.y - this.transform.localScale.y / 2f, this.transform.position.y + this.transform.localScale.y / 2f)
+        );
         
         timeToSpawn = GetCooldown();
+        Debug.Log(timeToSpawn);
 
 	}
 
     float GetCooldown() {
 
-        // todo cooldown function
-        return 0;
+        float
+            t = Time.time,
+            a = 385f,
+            o = 12.5f;
+
+        return a / (t + o);
 
 	}
 
