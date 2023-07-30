@@ -22,7 +22,7 @@ public class CameraFollow : MonoBehaviour {
 
     float f(float x) {
 
-        return 1 - Mathf.Pow(x - 1, 2f);
+        return (3 - 2 * x) * x * x;
 
 	}
 
@@ -37,9 +37,11 @@ public class CameraFollow : MonoBehaviour {
         halfHeight = cam.orthographicSize;
         halfWidth = halfHeight * cam.aspect;
 
+        Debug.Log(cam.aspect);
+
         float
-            x = map(player.position.x, leftEdge, rightEdge, leftEdge + halfWidth, rightEdge - halfWidth),
-            y = map(player.position.y, bottomEdge, topEdge, bottomEdge + halfHeight, topEdge - halfHeight);
+            x = map(player.position.x, leftEdge + 1, rightEdge - 1, leftEdge + halfWidth, rightEdge - halfWidth),
+            y = map(player.position.y, bottomEdge + 1, topEdge - 1, bottomEdge + halfHeight, topEdge - halfHeight);
 
         this.transform.position = new Vector3(x, y, -10f);
 
