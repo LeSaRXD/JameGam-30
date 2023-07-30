@@ -53,7 +53,7 @@ public class Player : MonoBehaviour {
         if(heldItem == null) {
 
             if(!interactable.CompareTag("Tree")) return;
-
+            
             if(interactable.GetComponent<Tree>().Harvest()) heldItem = Instantiate(itemPrefab, gameObject.transform);
 
             return;
