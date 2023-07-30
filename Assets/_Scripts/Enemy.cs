@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour {
         if(generator != null) return;
 
         float angle = Vector2.SignedAngle(Vector2.up, target.position - gameObject.transform.position);
-        float t = Time.time + randomOffset;
+        float t = Time.timeSinceLevelLoad + randomOffset;
         float offset = (Mathf.Sin(2f * t) + Mathf.Sin(t * Mathf.PI)) / 2f * maxAngleOffset;
 
         Vector2 velocity = Quaternion.Euler(0, 0, angle + offset) * Vector2.up * speed;

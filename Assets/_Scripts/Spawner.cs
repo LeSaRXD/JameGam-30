@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour {
     float GetCooldown() {
 
         float
-            t = Time.time,
+            t = Time.timeSinceLevelLoad,
             a = 385f,
             o = 12.5f;
 
