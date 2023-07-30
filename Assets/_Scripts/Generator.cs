@@ -5,7 +5,8 @@ using UnityEngine;
 public class Generator : MonoBehaviour {
 
     public readonly int maxHealth = 20;
-    public int health {
+    int health;
+    public int Health {
         get {
             return health;
         }
