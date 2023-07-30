@@ -7,16 +7,19 @@ public class Enemy : MonoBehaviour {
     [Header("Variables")]
     public float speed;
     public float maxAngleOffset = 45f;
+    public float damageCooldown = 3f;
 
     [Header("References")]
     public Transform target;
     public Generator generator;
+    float timer;
     Rigidbody2D rb;
-
+    
     void Start() {
 
         rb = GetComponent<Rigidbody2D>();
-        
+        timer = damageCooldown;
+
     }
 
     void Update() {
@@ -42,7 +45,9 @@ public class Enemy : MonoBehaviour {
     void Damage() {
 
         if(generator == null) return;
-
+        timer -= Time.deltaTime;
+        if (timer > 0) return;
+        timer = damageCooldown;
         generator.Health -= 1;
 
 	}

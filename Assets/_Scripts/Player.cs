@@ -6,8 +6,9 @@ public class Player : MonoBehaviour {
 
     public float speed;
     public GameObject itemPrefab;
-
+    [SerializeField]
     GameObject interactable;
+
     public GameObject Interactable {
         get {
             return interactable;
@@ -70,5 +71,11 @@ public class Player : MonoBehaviour {
         return;
 
 	}
+
+    public void RemoveInteractable(GameObject oldInteractable) {
+
+        if(interactable == oldInteractable) interactable = null;
+
+    }
 
 }

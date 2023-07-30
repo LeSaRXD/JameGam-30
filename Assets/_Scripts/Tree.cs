@@ -51,4 +51,11 @@ public class Tree : MonoBehaviour {
 
 	}
 
+    private void OnTriggerExit2D(Collider2D collision) {
+
+        if(!collision.gameObject.CompareTag("Player")) return;
+
+        collision.gameObject.GetComponent<Player>().RemoveInteractable(gameObject);
+
+    }
 }
