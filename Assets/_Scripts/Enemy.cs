@@ -51,4 +51,9 @@ public class Enemy : MonoBehaviour {
 
 	}
 
+    public void Die()
+    {
+
+    }
+
 }

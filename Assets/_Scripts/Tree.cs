@@ -26,4 +26,14 @@ public class Tree : MonoBehaviour {
 
 	}
 
+    public bool Harvest()
+    {
+        foreach (GameObject cog in cogs) {
+            if (cog.activeSelf) {
+                cog.SetActive(false);
+                return true;
+            }
+        }
+        return false;
+    }
 }
