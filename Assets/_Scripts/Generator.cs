@@ -9,11 +9,14 @@ public class Generator : MonoBehaviour {
     public int Health {
         get {
             return health;
-        }
-        set {
-            // todo change timescale
-            health = value;
 		}
+        set {
+
+            health = value;
+            if(health > maxHealth) health = maxHealth;
+            else if(health < 0) Stop();
+
+        }
     }
 
     void Start() {
@@ -22,10 +25,19 @@ public class Generator : MonoBehaviour {
 
     }
 
-    void Update() {
-        
+    void Stop() {
 
 
-    }
+
+	}
+
+	void OnTriggerEnter2D(Collider2D collision) {
+
+        if(collision.gameObject.CompareTag("Player"))
+            collision.gameObject.GetComponent<Player>().Interactable = gameObject;
+		else if(collision.gameObject.CompareTag("Enemy"))
+            collision.gameObject.GetComponent<Enemy>().generator = this;
+
+	}
 
 }

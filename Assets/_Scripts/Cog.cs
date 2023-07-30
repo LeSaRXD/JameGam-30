@@ -2,34 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cog : MonoBehaviour
-{
+public class Cog : MonoBehaviour {
+
     [Range(0f, 50f)]
     public float speed = 10;
     public int maxCollisions = 3;
+
     Rigidbody2D rb;
+    bool isThrown = false;
     int collisions = 0;
 
-    private void Start()
-    {
+    void Start() {
+
         rb = gameObject.GetComponent<Rigidbody2D>();
+
     }
 
-    public void Throw()
-    {
+    public void Throw() {
+
         Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.parent.position;
         gameObject.transform.SetParent(null);
         rb.velocity = cursorPos.normalized * speed;
+
+        isThrown = true;
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        if (enemy != null) {
-            Destroy(gameObject);
+    private void OnTriggerEnter2D(Collider2D collision) {
+
+        if(!isThrown) return;
+
+        if(collision.gameObject.CompareTag("Enemy")) {
+            
+            collision.gameObject.GetComponent<Enemy>().Die();
+            if (++collisions >= maxCollisions) Destroy(gameObject);
+
             return;
+
         }
-        enemy.Die();
-        if (++collisions >= maxCollisions) Destroy(gameObject);
+        if(!collision.gameObject.CompareTag("Player")) Destroy(gameObject);
+
     }
+
 }

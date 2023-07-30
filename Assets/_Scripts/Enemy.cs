@@ -33,7 +33,9 @@ public class Enemy : MonoBehaviour {
         float angle = Vector2.SignedAngle(Vector2.up, target.position - gameObject.transform.position);
         float offset = (Mathf.Sin(2f * Time.time) + Mathf.Sin(Time.time * Mathf.PI)) / 2f * maxAngleOffset;
 
-        rb.velocity = Quaternion.Euler(0, 0, angle + offset) * Vector2.up * speed;
+        Vector2 velocity = Quaternion.Euler(0, 0, angle + offset) * Vector2.up * speed;
+
+        rb.position += velocity * Time.deltaTime;
 
 	}
 
@@ -50,10 +52,5 @@ public class Enemy : MonoBehaviour {
         Destroy(gameObject);
 
 	}
-
-    public void Die()
-    {
-
-    }
 
 }
