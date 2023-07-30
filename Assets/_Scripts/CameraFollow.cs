@@ -37,8 +37,6 @@ public class CameraFollow : MonoBehaviour {
         halfHeight = cam.orthographicSize;
         halfWidth = halfHeight * cam.aspect;
 
-        Debug.Log(cam.aspect);
-
         float
             x = map(player.position.x, leftEdge + 1, rightEdge - 1, leftEdge + halfWidth, rightEdge - halfWidth),
             y = map(player.position.y, bottomEdge + 1, topEdge - 1, bottomEdge + halfHeight, topEdge - halfHeight);
