@@ -5,12 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     public float speed;
-    public GameObject heldItem;
+    public GameObject itemPrefab;
+    private GameObject heldItem;
 
     void Start() {
         
-
-
     }
 
     void Update() {
@@ -23,17 +22,17 @@ public class Player : MonoBehaviour {
 
 	}
 
-    void PickUpItem(GameObject newItem) {
-
-        if(heldItem == null) heldItem = newItem;
-
-	}
-
     void ThrowItem() {
 
 	}
 
-    void UseItem() {
+    void Interact() {
+
+
+
+	}
+
+    public void AddInteractable(GameObject newInteractable) {
 
 
 
