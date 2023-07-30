@@ -6,7 +6,6 @@ public class Player : MonoBehaviour {
 
     public float speed;
     public GameObject itemPrefab;
-    [SerializeField]
     GameObject interactable;
 
     public GameObject Interactable {
@@ -63,7 +62,7 @@ public class Player : MonoBehaviour {
 
         if(!interactable.CompareTag("Generator")) return;
 
-        interactable.AddComponent<Generator>().Health += 2;
+        interactable.GetComponent<Generator>().Health += 2;
 
         Destroy(heldItem);
         heldItem = null;

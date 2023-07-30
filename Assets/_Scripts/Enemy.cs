@@ -45,8 +45,10 @@ public class Enemy : MonoBehaviour {
     void Damage() {
 
         if(generator == null) return;
+
         timer -= Time.deltaTime;
         if (timer > 0) return;
+        
         timer = damageCooldown;
         generator.Health -= 1;
 

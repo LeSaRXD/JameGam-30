@@ -7,11 +7,7 @@ using UnityEngine.UI;
 public class Generator : MonoBehaviour {
 
     public readonly int maxHealth = 20;
-    public int health;
-    public Color green, yellow, red, darkRed;
-    public Slider healthBar;
-    public Image healthBarImage;
-
+    int health;
     public int Health {
         get {
             return health;
@@ -30,6 +26,10 @@ public class Generator : MonoBehaviour {
 
         }
     }
+
+    public Color green, yellow, red, darkRed;
+    public Slider healthBar;
+    public Image healthBarImage;
 
     void Start() {
         
