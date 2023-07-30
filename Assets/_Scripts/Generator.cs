@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 public class Generator : MonoBehaviour {
 
-    public readonly int maxHealth = 20;
+    public int maxHealth = 20;
     int health;
     public int Health {
         get {
             return health;
-		}
+        }
         set {
 
             health = value;
@@ -27,9 +28,19 @@ public class Generator : MonoBehaviour {
         }
     }
 
-    public Color green, yellow, red, darkRed;
+    [Header("Colors")]
+    public Color green;
+    public Color yellow;
+    public Color red;
+    public Color darkRed;
+
     public Slider healthBar;
     public Image healthBarImage;
+
+    [Header("Post Processing")]
+    public float weightChangeSpeed = 0.2f;
+    private float targetWeight = 0f;
+    public Volume postProcessVolume;
 
     void Start() {
         
@@ -39,12 +50,18 @@ public class Generator : MonoBehaviour {
 
     }
 
-    void Stop() {
+	private void Update() {
+
+        UpdatePostProcessing();
+		
+	}
+
+	void Stop() {
 
         SceneManager.LoadScene(0);
         UpdateTimeScale(1f, green);
 
-	}
+    }
 
     void UpdateTimeScale(float newTimeScale, Color newColor) {
 
@@ -53,22 +70,33 @@ public class Generator : MonoBehaviour {
 
         healthBarImage.color = newColor;
 
+        targetWeight = 1f - newTimeScale;
+
     }
 
-	void OnTriggerEnter2D(Collider2D collision) {
-
-        if(collision.gameObject.CompareTag("Player"))
-            collision.gameObject.GetComponent<Player>().Interactable = gameObject;
-		else if(collision.gameObject.CompareTag("Enemy"))
-            collision.gameObject.GetComponent<Enemy>().generator = this;
+    void UpdatePostProcessing() {
+        
+        float diff = targetWeight - postProcessVolume.weight;
+        if(diff == 0) return;
+        float change = Mathf.Sign(diff) * Mathf.Min(Mathf.Abs(diff), weightChangeSpeed * Time.unscaledDeltaTime);
+        postProcessVolume.weight += change;
 
 	}
+
+    void OnTriggerEnter2D(Collider2D collision) {
+
+        if(collision.gameObject.CompareTag("Player"))
+            collision.gameObject.GetComponent<Player>().interactables.Add(gameObject);
+        else if(collision.gameObject.CompareTag("Enemy"))
+            collision.gameObject.GetComponent<Enemy>().generator = this;
+
+    }
 
     private void OnTriggerExit2D(Collider2D collision) {
 
         if(!collision.gameObject.CompareTag("Player")) return;
 
-        collision.gameObject.GetComponent<Player>().RemoveInteractable(gameObject);
+        collision.gameObject.GetComponent<Player>().interactables.Remove(gameObject);
 
     }
 

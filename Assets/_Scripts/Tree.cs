@@ -27,7 +27,7 @@ public class Tree : MonoBehaviour {
 		
         if(!collision.gameObject.CompareTag("Player")) return;
 
-        collision.gameObject.GetComponent<Player>().Interactable = gameObject;
+        collision.gameObject.GetComponent<Player>().interactables.Add(gameObject);
 
 	}
 
@@ -35,7 +35,7 @@ public class Tree : MonoBehaviour {
 
         if(!collision.gameObject.CompareTag("Player")) return;
 
-        collision.gameObject.GetComponent<Player>().RemoveInteractable(gameObject);
+        collision.gameObject.GetComponent<Player>().interactables.Remove(gameObject);
 
     }
 }

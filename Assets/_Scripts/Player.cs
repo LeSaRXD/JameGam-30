@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    public float speed;
-    public GameObject itemPrefab;
-    GameObject interactable;
+    [Header("Variables")]
+    public float speed = 8f;
+    public int fixAmount = 5;
 
-    public GameObject Interactable {
-        get {
-            return interactable;
-        }
-        set {
-            if(interactable == null) interactable = value;
-		}
-    }
+    [Header("References")]
+    public GameObject itemPrefab;
+    // [HideInInspector]
+    public List<GameObject> interactables;
+
     GameObject heldItem;
     Rigidbody2D rb;
 
     void Start() {
+
         rb = GetComponent<Rigidbody2D>();
+        interactables = new List<GameObject>();
+
     }
 
     void Update() {
 
         Move();
+
         if(Input.GetMouseButtonDown(0)) ThrowItem();
         else if(Input.GetMouseButtonDown(1)) Interact();
 
@@ -44,36 +45,40 @@ public class Player : MonoBehaviour {
         heldItem.GetComponent<Cog>().Throw();
         heldItem = null;
 
-	}
+    }
 
     void Interact() {
 
-        if(interactable == null) return;
+        if(interactables.Count == 0) return;
 
-        if(heldItem == null) {
+        foreach(GameObject interactable in interactables) {
 
-            if(!interactable.CompareTag("Tree")) return;
+            if(heldItem == null) {
+
+                if(!interactable.CompareTag("Tree")) continue;
             
-            if(interactable.GetComponent<Tree>().Harvest()) heldItem = Instantiate(itemPrefab, gameObject.transform);
+                if(interactable.GetComponent<Tree>().Harvest()) {
 
-            return;
+                    heldItem = Instantiate(itemPrefab, gameObject.transform);
+                    break;
 
-		}
+                }
 
-        if(!interactable.CompareTag("Generator")) return;
+            } else {
 
-        interactable.GetComponent<Generator>().Health += 2;
+                if(!interactable.CompareTag("Generator")) continue;
 
-        Destroy(heldItem);
-        heldItem = null;
+                Generator generator = interactable.GetComponent<Generator>();
+                if(generator.Health < generator.maxHealth) generator.Health += fixAmount;
 
-        return;
+                Destroy(heldItem);
+                heldItem = null;
 
-	}
+                break;
 
-    public void RemoveInteractable(GameObject oldInteractable) {
+            }
 
-        if(interactable == oldInteractable) interactable = null;
+        }
 
     }
 
