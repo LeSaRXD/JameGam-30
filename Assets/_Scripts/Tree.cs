@@ -4,35 +4,15 @@ using UnityEngine;
 
 public class Tree : MonoBehaviour {
 
-    public GameObject[] cogs;
-    public readonly float growCooldown;
-    public float timeToGrow;
-
-    void Start() {
-        
-    }
-
-    void Update() {
-        
-        timeToGrow -= Time.deltaTime;
-        if(timeToGrow <= 0) Grow();
-
-    }
-
-    void Grow() {
-
-        // todo change cogs
-        timeToGrow = growCooldown;
-
-	}
-
+    public Animation[] cogs;
+    
     public bool Harvest() {
 
-        foreach(GameObject cog in cogs) {
+        foreach(Animation cog in cogs) {
 
-            if(cog.activeSelf) {
+            if(!cog.isPlaying) {
 
-                cog.SetActive(false);
+                cog.Play();
                 return true;
 
             }
