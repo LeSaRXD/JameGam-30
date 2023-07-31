@@ -42,6 +42,8 @@ public class Generator : MonoBehaviour {
     private float targetWeight = 0f;
     public Volume postProcessVolume;
 
+    public GameObject deathPanel; // UI
+
     void Start() {
         
         health = maxHealth;
@@ -58,8 +60,8 @@ public class Generator : MonoBehaviour {
 
 	void Stop() {
 
-        SceneManager.LoadScene(0);
-        UpdateTimeScale(1f, green);
+        UpdateTimeScale(0f, green);
+        deathPanel.SetActive(true);
 
     }
 
