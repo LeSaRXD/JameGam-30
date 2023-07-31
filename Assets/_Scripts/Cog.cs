@@ -18,9 +18,8 @@ public class Cog : MonoBehaviour {
 
     }
 
-    public void Throw() {
+    public void Throw(Vector2 cursorPos) {
 
-        Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.parent.position;
         gameObject.transform.SetParent(null);
         rb.velocity = cursorPos.normalized * speed;
 
