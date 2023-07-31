@@ -5,40 +5,61 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
 
     public GameObject enemyPrefab;
-    public Transform target;
-    [SerializeField]
-    private float timeToSpawn = 10f;
+    public Transform enemyTarget;
+    public Transform enemies;
 
-	void Update() {
-        
-        timeToSpawn -= Time.deltaTime;
-        if(timeToSpawn < 0f) Spawn();
+    public float timeBetweenWaves = 5f;
+
+    private int waveNumber = 1;
+
+    void Start() {
+
+        StartCoroutine(Wave());
 
     }
 
-    void Spawn() {
+    IEnumerator Wave() {
 
-        GameObject enemyObject = Instantiate(enemyPrefab);
+        while(true) {
 
-        enemyObject.transform.position = new Vector2(
-            Random.Range(this.transform.position.x - this.transform.localScale.x / 2f, this.transform.position.x + this.transform.localScale.x / 2f),
-            Random.Range(this.transform.position.y - this.transform.localScale.y / 2f, this.transform.position.y + this.transform.localScale.y / 2f)
-        );
-        
-        enemyObject.GetComponent<Enemy>().target = target;
+            // todo UI
+            Debug.Log("Wave " + waveNumber);
 
-        timeToSpawn = GetCooldown();
+            int enemyCount = GetEnemyCount(waveNumber);
+            for(int i = 0; i < enemyCount; i++) Spawn();
+
+            yield return new WaitUntil(() => enemies.childCount == 0);
+            
+            // todo UI
+            Debug.Log("Wave " + waveNumber + " complete!");
+
+            yield return new WaitForSeconds(timeBetweenWaves);
+
+            waveNumber++;
+
+		}
 
 	}
 
-    float GetCooldown() {
+    int GetEnemyCount(int wave) {
 
-        float
-            t = Time.timeSinceLevelLoad,
-            a = 385f,
-            o = 12.5f;
+        return 4;
 
-        return a / (t + o);
+	}
+
+	void Spawn() {
+
+        GameObject enemyObject = Instantiate(enemyPrefab, enemies);
+
+        int spawnArea = Random.Range(0, transform.childCount);
+        Transform area = transform.GetChild(spawnArea);
+
+        enemyObject.transform.position = new Vector2(
+            Random.Range(area.position.x - area.localScale.x / 2f, area.position.x + area.localScale.x / 2f),
+            Random.Range(area.position.y - area.localScale.y / 2f, area.position.y + area.localScale.y / 2f)
+        );
+        
+        enemyObject.GetComponent<Enemy>().target = enemyTarget;
 
 	}
 
