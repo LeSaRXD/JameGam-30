@@ -9,7 +9,6 @@ TagManager:
   - Generator
   - Tree
   - Gear
-  - Cog
   layers:
   - Default
   - TransparentFX
@@ -22,7 +21,7 @@ TagManager:
   - Gear
   - Tree
   - Generator
-  - 
+  - Walls
   - 
   - 
   - 

@@ -18,7 +18,6 @@ public class Player : MonoBehaviour {
     public SpriteRenderer sprite;
     public Animator animator;
     public GameObject heldGear;
-    SpriteRenderer heldGearRenderer;
 
     [HideInInspector]
     public List<GameObject> interactables;
@@ -40,8 +39,6 @@ public class Player : MonoBehaviour {
 
         rb = GetComponent<Rigidbody2D>();
         interactables = new List<GameObject>();
-
-        heldGearRenderer = heldGear.GetComponent<SpriteRenderer>();
 
         HoldingGear = false;
 
@@ -110,50 +107,20 @@ public class Player : MonoBehaviour {
         switch(direction) {
             case Direction.Down:
                 heldGear.transform.localPosition = Vector2.down * itemOffset.y;
-                heldGearRenderer.sortingOrder = 1;
                 break;
             case Direction.Up:
                 heldGear.transform.localPosition = Vector2.up * itemOffset.y;
-                heldGearRenderer.sortingOrder = -1;
                 break;
             case Direction.Left:
                 heldGear.transform.localPosition = Vector2.left * itemOffset.x;
-                heldGearRenderer.sortingOrder = 1;
                 break;
             case Direction.Right:
                 heldGear.transform.localPosition = Vector2.right * itemOffset.x;
-                heldGearRenderer.sortingOrder = 1;
                 break;
 		}
 
 	}
-
-    IEnumerator ThrowGear() {
-
-        if(!HoldingGear) yield break;
-
-        Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        SetDirection(cursorPos);
-        canRotate = false;
-
-        GameObject gear = Instantiate(gearPrefab);
-        gear.transform.position = heldGear.transform.position;
-
-		HoldingGear = false;
-
-        animator.Play(
-            "Throw_" + (
-                (direction == Direction.Up) ?
-                "Up" : ((direction == Direction.Down) ? "Down" : "Side")
-            )
-        );
-
-        yield return new WaitForSecondsRealtime(throwCooldown);
-
-        canRotate = true;
-
-    }
-
+    
     void Interact() {
 
         if(interactables.Count == 0) return;
@@ -185,6 +152,32 @@ public class Player : MonoBehaviour {
             }
 
         }
+
+    }
+
+    IEnumerator ThrowGear() {
+
+        if(!HoldingGear) yield break;
+
+        Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        SetDirection(cursorPos);
+        canRotate = false;
+
+        GameObject gear = Instantiate(gearPrefab);
+        gear.transform.position = heldGear.transform.position;
+
+		HoldingGear = false;
+
+        animator.Play(
+            "Throw_" + (
+                (direction == Direction.Up) ?
+                "Up" : ((direction == Direction.Down) ? "Down" : "Side")
+            )
+        );
+
+        yield return new WaitForSecondsRealtime(throwCooldown);
+
+        canRotate = true;
 
     }
 

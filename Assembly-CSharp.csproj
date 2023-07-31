@@ -58,14 +58,14 @@
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Tree.cs" />
     <Compile Include="Assets\_Scripts\TreeGenerator.cs" />
+    <Compile Include="Assets\_Scripts\GameUI.cs" />
     <Compile Include="Assets\_Scripts\Spawner.cs" />
     <Compile Include="Assets\_Scripts\CameraFollow.cs" />
     <Compile Include="Assets\_Scripts\Gear.cs" />
+    <Compile Include="Assets\_Scripts\MenuUI.cs" />
     <Compile Include="Assets\_Scripts\Generator.cs" />
     <Compile Include="Assets\_Scripts\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Player.cs" />
-    <Compile Include="Assets\_Scripts\GameUI.cs" />
-    <Compile Include="Assets\_Scripts\MenuUI.cs" />
     <Compile Include="Assets\_Scripts\Direction.cs" />
   </ItemGroup>
   <ItemGroup>

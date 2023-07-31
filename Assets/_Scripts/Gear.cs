@@ -30,7 +30,7 @@ public class Gear : MonoBehaviour {
             return;
 
         }
-        if(!collision.gameObject.CompareTag("Player")) Destroy(gameObject);
+        Destroy(gameObject);
 
     }
 
