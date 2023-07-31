@@ -16,6 +16,9 @@ public class Player : MonoBehaviour {
     GameObject heldItem;
     Rigidbody2D rb;
 
+    public enum Direction { Up, Down, Left, Right };
+    public Direction direction = Direction.Up;
+
     void Start() {
 
         rb = GetComponent<Rigidbody2D>();
@@ -34,8 +37,16 @@ public class Player : MonoBehaviour {
 
     void Move() {
 
-        rb.position += new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * speed * Time.unscaledDeltaTime;
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        rb.position += new Vector2(horizontal, vertical).normalized * speed * Time.unscaledDeltaTime;
         if(heldItem != null) heldItem.transform.position = gameObject.transform.position;
+
+        if(vertical == 0 && horizontal == 0) return;
+        if(Mathf.Abs(horizontal) >= Mathf.Abs(vertical))
+            direction = (horizontal > 0) ? Direction.Right : Direction.Left;
+        else direction = (vertical > 0) ? Direction.Up : Direction.Down;
 
     }
 
@@ -81,5 +92,7 @@ public class Player : MonoBehaviour {
         }
 
     }
+
+    
 
 }
