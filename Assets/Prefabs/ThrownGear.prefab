@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2323963560970948269}
   - component: {fileID: 2323963560970948268}
   - component: {fileID: 2323963560970948271}
-  - component: {fileID: 2323963560970948270}
+  - component: {fileID: 8723429503583324212}
   m_Layer: 8
-  m_Name: Cog
-  m_TagString: Cog
+  m_Name: ThrownGear
+  m_TagString: Gear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,9 +100,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.5
 --- !u!50 &2323963560970948271
 Rigidbody2D:
   serializedVersion: 4
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2323963560970948270
+--- !u!114 &8723429503583324212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

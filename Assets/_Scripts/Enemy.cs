@@ -16,14 +16,14 @@ public class Enemy : MonoBehaviour {
     Rigidbody2D rb;
 
     float randomOffset;
-    float timer;
+    float attackCooldown;
     
     void Start() {
 
         rb = GetComponent<Rigidbody2D>();
         
         randomOffset = Random.value * 10;
-        timer = damageCooldown;
+        attackCooldown = damageCooldown;
 
     }
 
@@ -52,10 +52,10 @@ public class Enemy : MonoBehaviour {
 
         if(generator == null) return;
 
-        timer -= Time.deltaTime;
-        if (timer > 0) return;
+        attackCooldown -= Time.deltaTime;
+        if (attackCooldown > 0) return;
         
-        timer = damageCooldown;
+        attackCooldown = damageCooldown;
         generator.Health -= 1;
 
 	}

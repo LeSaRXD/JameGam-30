@@ -7,8 +7,9 @@ TagManager:
   - Spawner
   - Enemy
   - Generator
-  - Cog
   - Tree
+  - Gear
+  - Cog
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - Cog
+  - Gear
   - Tree
   - Generator
   - 

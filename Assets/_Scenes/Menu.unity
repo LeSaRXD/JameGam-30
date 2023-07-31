@@ -497,7 +497,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2043778318}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -560,7 +560,7 @@ GameObject:
   - component: {fileID: 2043778314}
   - component: {fileID: 2043778318}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -657,7 +657,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2043778313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8451fb49bacad845b3e97d47b6bbd9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 936c8191043b8784dbafcb3fcfa82350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathPanel: {fileID: 0}
