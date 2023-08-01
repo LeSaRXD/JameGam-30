@@ -46,9 +46,10 @@ public class Generator : MonoBehaviour {
 
     void Start() {
         
+        UpdateTimeScale(1f, green);
+
         health = maxHealth;
         healthBar.maxValue = maxHealth;
-        healthBarImage.color = green;
 
     }
 
