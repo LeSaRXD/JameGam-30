@@ -307,7 +307,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 2}
+  m_Size: {x: 2.5, y: 1.5}
   m_EdgeRadius: 0
 --- !u!4 &167136563
 Transform:
@@ -1560,7 +1560,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 8.9375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1606,7 +1606,7 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_AssetsPPU: 16
   m_RefResolutionX: 480
-  m_RefResolutionY: 180
+  m_RefResolutionY: 270
   m_CropFrame: 0
   m_GridSnapping: 0
   m_UpscaleRT: 0
@@ -1756,10 +1756,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44df9c579b5925b44bc702db942ffcb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenWaves: 5
+  maxWaveDuration: 30
   enemyPrefab: {fileID: 4081748613135701609, guid: ba3e5f17621696e44b3445c415bac956, type: 3}
   enemyTarget: {fileID: 167136563}
   enemies: {fileID: 903065925}
-  timeBetweenWaves: 5
 --- !u!1 &1473824135
 GameObject:
   m_ObjectHideFlags: 0

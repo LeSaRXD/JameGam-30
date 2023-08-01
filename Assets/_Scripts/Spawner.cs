@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
+    [Header("Variables")]
+    public float timeBetweenWaves = 5f;
+    public float maxWaveDuration = 30f;
+
+    [Header("References")]
     public GameObject enemyPrefab;
     public Transform enemyTarget;
     public Transform enemies;
 
-    public float timeBetweenWaves = 5f;
+    float waveStartTime;
+    int waveNumber = 1;
 
-    private int waveNumber = 1;
+
 
     void Start() {
 
@@ -25,10 +31,15 @@ public class Spawner : MonoBehaviour {
             // todo UI
             Debug.Log("Wave " + waveNumber);
 
+            waveStartTime = Time.time;
+
             int enemyCount = GetEnemyCount(waveNumber);
             for(int i = 0; i < enemyCount; i++) Spawn();
 
-            yield return new WaitUntil(() => enemies.childCount == 0);
+            yield return new WaitUntil(() => (
+                (enemies.childCount == 0) ||
+                (Time.time - waveStartTime > maxWaveDuration)
+            ));
             
             // todo UI
             Debug.Log("Wave " + waveNumber + " complete!");

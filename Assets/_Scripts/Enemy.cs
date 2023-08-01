@@ -8,35 +8,48 @@ public class Enemy : MonoBehaviour {
     public float speed;
     public float maxAngleOffset = 45f;
     public float damageCooldown = 3f;
+    Direction direction = Direction.Up;
 
-    [Header("References")]
+    [HideInInspector]
     public Transform target;
+    [HideInInspector]
     public Generator generator;
-
     Rigidbody2D rb;
+    SpriteRenderer sprite;
+    Animator animator;
 
     float randomOffset;
-    float attackCooldown;
-    
+    bool damaging = false;
+    bool dying = false;
+
+
+
     void Start() {
 
         rb = GetComponent<Rigidbody2D>();
-        
-        randomOffset = Random.value * 10;
-        attackCooldown = damageCooldown;
+        sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
+        randomOffset = Random.value * 100;
+        
     }
 
     void Update() {
+
+        bool isRunning = generator == null;
+
+        if(damaging || dying) return;
         
-        Move();
-        Damage();
+        if(isRunning) {
+            
+            Move();
+            UpdateSprite(isRunning);
+
+        } else StartCoroutine(Damage());
 
     }
 
     void Move() {
-
-        if(generator != null) return;
 
         float angle = Vector2.SignedAngle(Vector2.up, target.position - gameObject.transform.position);
         float t = Time.timeSinceLevelLoad + randomOffset;
@@ -46,23 +59,77 @@ public class Enemy : MonoBehaviour {
 
         rb.position += velocity * Time.deltaTime;
 
+        if(Mathf.Abs(velocity.x) >= Mathf.Abs(velocity.y))
+            direction = (velocity.x > 0) ? Direction.Right : Direction.Left;
+        else direction = (velocity.y > 0) ? Direction.Up : Direction.Down;
+
 	}
 
-    void Damage() {
+    IEnumerator Damage() {
 
-        if(generator == null) return;
+        yield return new WaitForEndOfFrame();
 
-        attackCooldown -= Time.deltaTime;
-        if (attackCooldown > 0) return;
+        damaging = true;
+
+        string animationString = "Damage_" + (
+            (direction == Direction.Up) ?
+            "Up" : ((direction == Direction.Down) ? "Down" : "Side")
+        );
+        animator.Play(animationString);
         
-        attackCooldown = damageCooldown;
+        yield return new WaitUntil(() => !damaging);
+
         generator.Health -= 1;
+
+	}
+
+    void UpdateSprite(bool isRunning) {
+
+        sprite.flipX = direction == Direction.Left;
+
+        string animationString = (
+            isRunning ? "Run_" : "Idle_"
+        ) + (
+            (direction == Direction.Up) ?
+            "Up" : ((direction == Direction.Down) ? "Down" : "Side")
+        );
+
+        animator.Play(animationString);
 
 	}
 
     public void Die() {
 
+        StartCoroutine(DieRoutine());
+
+	}
+
+    IEnumerator DieRoutine() {
+
+        dying = true;
+
+        string animationString = "Die_" + (
+            (direction == Direction.Up) ?
+            "Up" : ((direction == Direction.Down) ? "Down" : "Side")
+        );
+        animator.Play(animationString);
+        
+        yield return new WaitUntil(() => !dying);
+
         Destroy(gameObject);
+
+	}
+
+    public void StoppedDamaging() {
+
+        if(dying) return;
+		damaging = false;
+
+	}
+
+    public void Dead() {
+        
+        dying = false;
 
 	}
 

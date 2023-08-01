@@ -91,12 +91,16 @@ public class Player : MonoBehaviour {
 
     void UpdateAnimation(bool isRunning) {
 
-        string animName = isRunning ? "Run_" : "Idle_";
-        animName += (direction == Direction.Up) ?
-            "Up" : ((direction == Direction.Down) ? "Down" : "Side");
-        if(HoldingGear) animName += "_Holding";
+        string animationString = (
+            isRunning ? "Run_" : "Idle_"
+        ) + (
+            (direction == Direction.Up) ?
+            "Up" : ((direction == Direction.Down) ? "Down" : "Side")
+        );
 
-        animator.Play(animName);
+        if(HoldingGear) animationString += "_Holding";
+
+        animator.Play(animationString);
 
 	}
 
