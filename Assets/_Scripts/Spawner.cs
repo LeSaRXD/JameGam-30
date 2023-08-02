@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
@@ -12,6 +13,11 @@ public class Spawner : MonoBehaviour {
     public GameObject enemyPrefab;
     public Transform enemyTarget;
     public Transform enemies;
+
+    // UI
+    public TextMeshProUGUI waveCounter;
+    public TextMeshProUGUI waveExecution;
+    public Animation completeAnimation;
 
     float waveStartTime;
     int waveNumber = 1;
@@ -28,8 +34,7 @@ public class Spawner : MonoBehaviour {
 
         while(true) {
 
-            // todo UI
-            Debug.Log("Wave " + waveNumber);
+            waveCounter.text = "Wave " + waveNumber;
 
             waveStartTime = Time.time;
 
@@ -40,9 +45,9 @@ public class Spawner : MonoBehaviour {
                 (enemies.childCount == 0) ||
                 (Time.time - waveStartTime > maxWaveDuration)
             ));
-            
-            // todo UI
-            Debug.Log("Wave " + waveNumber + " complete!");
+
+            waveExecution.text = "Wave " + waveNumber + " complete!";
+            completeAnimation.Play();
 
             yield return new WaitForSeconds(timeBetweenWaves);
 
@@ -54,7 +59,7 @@ public class Spawner : MonoBehaviour {
 
     int GetEnemyCount(int wave) {
 
-        return 4;
+        return Mathf.Min((int)(1.89473684f * (wave - 1) + 4), 40);
 
 	}
 
