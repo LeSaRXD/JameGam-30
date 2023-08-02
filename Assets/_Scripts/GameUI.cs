@@ -25,4 +25,8 @@ public class GameUI : MonoBehaviour {
 
     }
 
+    public void TEST() {
+        Debug.Log("13");
+    }
+
 }
