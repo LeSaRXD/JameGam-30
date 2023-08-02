@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TreeGenerator : MonoBehaviour {
 
-    public GameObject treePrefab;
+    public GameObject[] treePrefabs;
     public int rows = 6, columns = 8;
 
     void Start() {
@@ -22,7 +22,7 @@ public class TreeGenerator : MonoBehaviour {
                     x = (column + Random.Range(0.1f, 0.9f)) * width - transform.localScale.x / 2f,
                     y = (row + Random.Range(0.1f, 0.9f)) * height - transform.localScale.y / 2f;
 
-                GameObject tree = Instantiate(treePrefab);
+                GameObject tree = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Length)]);
                 tree.transform.position = new Vector2(x, y);
 
             }

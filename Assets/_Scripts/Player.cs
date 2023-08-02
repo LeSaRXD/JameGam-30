@@ -165,6 +165,7 @@ public class Player : MonoBehaviour {
 
         Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         SetDirection(cursorPos);
+        MoveGear();
         canRotate = false;
 
         GameObject gear = Instantiate(gearPrefab);

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Throw_Up
+  m_Name: Break
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,14 +20,18 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -2020030038, guid: ba5d6971ca9011b4dac40e0b55d70e81, type: 3}
-    - time: 0.25
-      value: {fileID: -42013448, guid: ba5d6971ca9011b4dac40e0b55d70e81, type: 3}
+      value: {fileID: -783626009, guid: 0dd8c3cb86105a8408ada9d344d06ab4, type: 3}
+    - time: 0.16666667
+      value: {fileID: 2127457077, guid: 0dd8c3cb86105a8408ada9d344d06ab4, type: 3}
+    - time: 0.33333334
+      value: {fileID: 285268009, guid: 0dd8c3cb86105a8408ada9d344d06ab4, type: 3}
+    - time: 0.5
+      value: {fileID: 285268009, guid: 0dd8c3cb86105a8408ada9d344d06ab4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 4
+  m_SampleRate: 6
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -42,14 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -2020030038, guid: ba5d6971ca9011b4dac40e0b55d70e81, type: 3}
-    - {fileID: -42013448, guid: ba5d6971ca9011b4dac40e0b55d70e81, type: 3}
+    - {fileID: -783626009, guid: 0dd8c3cb86105a8408ada9d344d06ab4, type: 3}
+    - {fileID: 2127457077, guid: 0dd8c3cb86105a8408ada9d344d06ab4, type: 3}
+    - {fileID: 285268009, guid: 0dd8c3cb86105a8408ada9d344d06ab4, type: 3}
+    - {fileID: 285268009, guid: 0dd8c3cb86105a8408ada9d344d06ab4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -68,4 +74,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.5
+    functionName: Broken
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
