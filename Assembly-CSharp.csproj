@@ -70,6 +70,7 @@
     <Compile Include="Assets\_Scripts\TimeManager.cs" />
     <Compile Include="Assets\_Scripts\Spin.cs" />
     <Compile Include="Assets\_Scripts\DecoGenerator.cs" />
+    <Compile Include="Assets\_Scripts\GameSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

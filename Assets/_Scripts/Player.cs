@@ -50,6 +50,8 @@ public class Player : MonoBehaviour {
 
     void Update() {
 
+        if(GameSettings.paused) return;
+
         Move();
         MoveGear();
 
