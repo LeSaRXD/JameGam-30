@@ -10,12 +10,13 @@ public class MenuUI : MonoBehaviour {
 
 	public TextMeshProUGUI highestWave;
     public GameObject settingsPanel;
-    public Slider volumeSlider;
+    public Slider volume;
+    public GameObject tutorialPanel;
 
     private void Start() {
 
         highestWave.text = "Highest wave: " + PlayerPrefs.GetInt("HighestWave", 0).ToString();
-        volumeSlider.value = GameSettings.MasterVolume;
+        volume.value = GameSettings.MasterVolume;
 
     }
 
@@ -31,11 +32,15 @@ public class MenuUI : MonoBehaviour {
         else settingsPanel.SetActive(true);
 
     }
+    public void Tutorial() {
+
+        if (tutorialPanel.activeSelf) tutorialPanel.SetActive(false);
+        else tutorialPanel.SetActive(true);
+
+    }
 
     public void OnVolumeChange() {
-
-        GameSettings.MasterVolume = volumeSlider.value;
-
+        GameSettings.MasterVolume = volume.value;
     }
 
 }
