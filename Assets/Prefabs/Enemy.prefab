@@ -164,8 +164,8 @@ MonoBehaviour:
   damageCooldown: 3
   target: {fileID: 0}
   generator: {fileID: 0}
-  hitSound: {fileID: -64757352093812106}
-  deathSound: {fileID: -9060447227716565974}
+  hitAudioSource: {fileID: -64757352093812106}
+  deathAudioSource: {fileID: -9060447227716565974}
 --- !u!82 &-64757352093812106
 AudioSource:
   m_ObjectHideFlags: 0
@@ -176,9 +176,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9b07e0ca6ad8cce44a208df38fefc2d8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5bf0972d4eae0eb40a32d32ba4cb4f15, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -272,9 +272,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9b07e0ca6ad8cce44a208df38fefc2d8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 09fa27d656c571642ba7f649ccb09443, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

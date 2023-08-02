@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class GameSettings {
     
+    public static bool dead = false;
     public static bool paused = false;
     static float masterVolume = 1f;
     public static float MasterVolume {

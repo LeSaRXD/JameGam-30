@@ -22,10 +22,9 @@ public class TimeManager : MonoBehaviour {
 
 	[Header("Audio")]
     public AudioSource bgmAudioSource;
-    public AudioSource effectsAudioSource;
-	public AudioClip slowDownClip;
-    public AudioClip speedUpClip;
-	public AudioClip deathClip;
+    public AudioSource slowDownAudioSource;
+    public AudioSource speedUpAudioSource;
+    public AudioSource deathAudioSource;
     public float pitchUpdateSpeed = 0.25f;
 
     float currentPitch = 1f;
@@ -46,8 +45,29 @@ public class TimeManager : MonoBehaviour {
         UpdatePostProcessing();
 
     }
+
+    public void Pause() {
+
+        if(GameSettings.dead) return;
+
+        GameSettings.paused = true;
+        bgmAudioSource.Pause();
+        slowDownAudioSource.Pause();
+        speedUpAudioSource.Pause();
+
+	}
+
+    public void Resume() {
+
+        GameSettings.paused = false;
+        bgmAudioSource.Play();
+        slowDownAudioSource.Play();
+
+	}
     
 	public void Stop() {
+
+        GameSettings.dead = true;
 
         UpdateTimeScale(0f);
         deathPanel.SetActive(true);
@@ -66,11 +86,21 @@ public class TimeManager : MonoBehaviour {
         if(newTimeScale <= 0) {
             
             bgmAudioSource.Stop();
-            effectsAudioSource.PlayOneShot(deathClip, 1f);
+            deathAudioSource.Play();
 
 		}
-        if(targetPitch > newTimeScale) effectsAudioSource.PlayOneShot(slowDownClip, 1f);
-        else if(targetPitch < newTimeScale) effectsAudioSource.PlayOneShot(speedUpClip, 1f);
+        if(targetPitch > newTimeScale) {
+            
+            speedUpAudioSource.Stop();
+            slowDownAudioSource.Play();
+
+        }
+        else if(targetPitch < newTimeScale) {
+            
+            speedUpAudioSource.Play();
+            slowDownAudioSource.Stop();
+
+        }
 
         targetPitch = newTimeScale;
 

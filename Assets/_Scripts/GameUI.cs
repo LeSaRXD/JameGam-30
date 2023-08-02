@@ -9,7 +9,7 @@ public class GameUI : MonoBehaviour {
 
     void Start() {
 
-        if(deathPanel != null) deathPanel.SetActive(false);
+        deathPanel.SetActive(false);
 
     }
 

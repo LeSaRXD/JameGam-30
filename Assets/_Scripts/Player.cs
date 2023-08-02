@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
 
     SpriteRenderer sprite;
     Animator animator;
-    AudioSource audio;
+    AudioSource audioSource;
 
     [HideInInspector]
     public List<GameObject> interactables;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         interactables = new List<GameObject>();
 
@@ -189,7 +189,7 @@ public class Player : MonoBehaviour {
             )
         );
 
-        audio.Play();
+        audioSource.Play();
 
         yield return new WaitForSecondsRealtime(throwCooldown);
 
