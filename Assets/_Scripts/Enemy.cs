@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour {
     bool damaging = false;
     bool dying = false;
 
+    public AudioSource hitSound;
+    public AudioSource deathSound;
 
 
     void Start() {
@@ -29,6 +31,8 @@ public class Enemy : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        //hitSound = GetComponent<AudioSource>();
+        //deathSound = GetComponent<AudioSource>();
 
         randomOffset = Random.value * 100;
         
@@ -113,13 +117,15 @@ public class Enemy : MonoBehaviour {
 
     public void DealDamage() {
 
+        hitSound.Play();
         generator.Health -= 1;
 
     }
 
 
     public void Dead() {
-        
+
+        deathSound.Play();
         Destroy(gameObject);
 
 	}

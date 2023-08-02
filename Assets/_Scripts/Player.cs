@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
 
     SpriteRenderer sprite;
     Animator animator;
+    AudioSource audio;
 
     [HideInInspector]
     public List<GameObject> interactables;
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
 
         interactables = new List<GameObject>();
 
@@ -184,6 +186,8 @@ public class Player : MonoBehaviour {
                 "Up" : ((direction == Direction.Down) ? "Down" : "Side")
             )
         );
+
+        audio.Play();
 
         yield return new WaitForSecondsRealtime(throwCooldown);
 
