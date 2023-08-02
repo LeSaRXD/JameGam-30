@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour {
     
-    public TimeManager timeManager;
-
     public GameObject pausePanel;
     public GameObject deathPanel;
     public Slider volumeSlider;
@@ -31,32 +29,27 @@ public class GameUI : MonoBehaviour {
         if(GameSettings.paused) {
 
             pausePanel.SetActive(false);
-            timeManager.Resume();
+            TimeManager.instance.Resume();
 
 		} else {
 
             pausePanel.SetActive(true);
-            timeManager.Pause();
+            TimeManager.instance.Pause();
 
         }
             
 	}
 
-	public void Resume() {
-
-        pausePanel.SetActive(false);
-        timeManager.Resume();
-
-	}
-
     public void Restart() {
-
+        
+        GameSettings.Reset();
         SceneManager.LoadScene("Game");
         
     }
 
     public void MainMenu() {
 
+        GameSettings.Reset();
         SceneManager.LoadScene("Menu");
 
     }

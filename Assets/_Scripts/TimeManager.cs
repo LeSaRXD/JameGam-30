@@ -37,7 +37,9 @@ public class TimeManager : MonoBehaviour {
     
     void Start() {
         
-        if(instance == null) instance = this;
+        instance = this;
+
+        UpdateTimeScale(1f);
 
         bgmAudioSource = GetComponent<AudioSource>();
 
@@ -74,6 +76,7 @@ public class TimeManager : MonoBehaviour {
         GameSettings.paused = false;
 
         playerAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
 
 
         bgmAudioSource.UnPause();

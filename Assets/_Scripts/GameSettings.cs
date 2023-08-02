@@ -23,4 +23,11 @@ public static class GameSettings {
 		}
 	}
 
+    public static void Reset() {
+
+        paused = false;
+        dead = false;
+
+	}
+
 }
