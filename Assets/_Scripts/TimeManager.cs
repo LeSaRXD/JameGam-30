@@ -7,7 +7,9 @@ using UnityEngine.Rendering;
 public class TimeManager : MonoBehaviour {
     
     public static TimeManager instance;
-
+    
+    [Header("References")]
+    public Animator playerAnimator;
     public Spawner spawner;
 
     [Header("Post Processing")]
@@ -29,6 +31,8 @@ public class TimeManager : MonoBehaviour {
 
     float currentPitch = 1f;
     float targetPitch = 1f;
+    float prevTimeScale;
+
 
     
     void Start() {
@@ -49,8 +53,14 @@ public class TimeManager : MonoBehaviour {
     public void Pause() {
 
         if(GameSettings.dead) return;
+        
+        prevTimeScale = Time.timeScale;
+        Time.timeScale = 0f;
 
         GameSettings.paused = true;
+
+        playerAnimator.updateMode = AnimatorUpdateMode.Normal;
+
         bgmAudioSource.Pause();
         slowDownAudioSource.Pause();
         speedUpAudioSource.Pause();
@@ -59,9 +69,16 @@ public class TimeManager : MonoBehaviour {
 
     public void Resume() {
 
+        Time.timeScale = prevTimeScale;
+
         GameSettings.paused = false;
-        bgmAudioSource.Play();
-        slowDownAudioSource.Play();
+
+        playerAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
+
+        bgmAudioSource.UnPause();
+        slowDownAudioSource.UnPause();
+        speedUpAudioSource.UnPause();
 
 	}
     
