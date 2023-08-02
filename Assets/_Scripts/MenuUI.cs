@@ -11,6 +11,7 @@ public class MenuUI : MonoBehaviour {
 	public TextMeshProUGUI highestWave;
     public GameObject settingsPanel;
     public Slider volume;
+    public GameObject tutorialPanel;
 
     private void Start() {
 
@@ -26,8 +27,16 @@ public class MenuUI : MonoBehaviour {
 	}
 
     public void Settings() {
+
         if(settingsPanel.activeSelf) settingsPanel.SetActive(false);
         else settingsPanel.SetActive(true);
+
+    }
+    public void Tutorial() {
+
+        if (tutorialPanel.activeSelf) tutorialPanel.SetActive(false);
+        else tutorialPanel.SetActive(true);
+
     }
 
     public void OnVolumeChange() {
