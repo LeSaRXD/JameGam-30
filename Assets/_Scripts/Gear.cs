@@ -15,8 +15,8 @@ public class Gear : MonoBehaviour {
 
     void Start() {
 
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        animator = gameObject.GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         rb.velocity = cursorPos.normalized * speed;

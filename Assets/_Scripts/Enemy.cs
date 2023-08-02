@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour {
             Move();
             UpdateSprite(isRunning);
 
-        } else StartCoroutine(Damage());
+        } else Damage();
 
     }
 
@@ -65,9 +65,7 @@ public class Enemy : MonoBehaviour {
 
 	}
 
-    IEnumerator Damage() {
-
-        yield return new WaitForEndOfFrame();
+    void Damage() {
 
         damaging = true;
 
@@ -77,10 +75,6 @@ public class Enemy : MonoBehaviour {
         );
         animator.Play(animationString);
         
-        yield return new WaitUntil(() => !damaging);
-
-        generator.Health -= 1;
-
 	}
 
     void UpdateSprite(bool isRunning) {
@@ -100,12 +94,6 @@ public class Enemy : MonoBehaviour {
 
     public void Die() {
 
-        StartCoroutine(DieRoutine());
-
-	}
-
-    IEnumerator DieRoutine() {
-
         dying = true;
 
         string animationString = "Die_" + (
@@ -113,10 +101,6 @@ public class Enemy : MonoBehaviour {
             "Up" : ((direction == Direction.Down) ? "Down" : "Side")
         );
         animator.Play(animationString);
-        
-        yield return new WaitUntil(() => !dying);
-
-        Destroy(gameObject);
 
 	}
 
@@ -127,9 +111,16 @@ public class Enemy : MonoBehaviour {
 
 	}
 
+    public void DealDamage() {
+
+        generator.Health -= 1;
+
+    }
+
+
     public void Dead() {
         
-        dying = false;
+        Destroy(gameObject);
 
 	}
 

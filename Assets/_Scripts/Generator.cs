@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Rendering;
 
 public class Generator : MonoBehaviour {
 
@@ -16,7 +15,7 @@ public class Generator : MonoBehaviour {
         set {
 
             health = value;
-            if(health <= 0) Stop();
+            if(health <= 0) TimeManager.instance.Stop();
             else if(health <= 2) UpdateTimeScale(0.25f, darkRed);
             else if(health <= 5) UpdateTimeScale(0.5f, red);
             else if(health <= 10) UpdateTimeScale(0.75f, yellow);
@@ -28,21 +27,17 @@ public class Generator : MonoBehaviour {
         }
     }
 
+    [Header("UI")]
+    public Slider healthBar;
+    public Image healthBarImage;
+
     [Header("Colors")]
     public Color green;
     public Color yellow;
     public Color red;
     public Color darkRed;
 
-    public Slider healthBar;
-    public Image healthBarImage;
 
-    [Header("Post Processing")]
-    public float weightChangeSpeed = 0.2f;
-    private float targetWeight = 0f;
-    public Volume postProcessVolume;
-
-    public GameObject deathPanel; // UI
 
     void Start() {
         
@@ -53,38 +48,12 @@ public class Generator : MonoBehaviour {
 
     }
 
-	private void Update() {
-
-        UpdatePostProcessing();
-		
-	}
-
-	void Stop() {
-
-        UpdateTimeScale(0f, green);
-        deathPanel.SetActive(true);
-
-    }
-
     void UpdateTimeScale(float newTimeScale, Color newColor) {
 
-        Time.timeScale = newTimeScale;
-        Time.fixedDeltaTime = 0.02f * newTimeScale;
-
+        TimeManager.instance.UpdateTimeScale(newTimeScale);
         healthBarImage.color = newColor;
 
-        targetWeight = 1f - newTimeScale;
-
     }
-
-    void UpdatePostProcessing() {
-        
-        float diff = targetWeight - postProcessVolume.weight;
-        if(diff == 0) return;
-        float change = Mathf.Sign(diff) * Mathf.Min(Mathf.Abs(diff), weightChangeSpeed * Time.unscaledDeltaTime);
-        postProcessVolume.weight += change;
-
-	}
 
     void OnTriggerEnter2D(Collider2D collision) {
 
@@ -97,9 +66,10 @@ public class Generator : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision) {
 
-        if(!collision.gameObject.CompareTag("Player")) return;
-
-        collision.gameObject.GetComponent<Player>().interactables.Remove(gameObject);
+        if(collision.gameObject.CompareTag("Player"))
+            collision.gameObject.GetComponent<Player>().interactables.Remove(gameObject);
+        else if(collision.gameObject.CompareTag("Enemy"))
+            collision.gameObject.GetComponent<Enemy>().generator = null;
 
     }
 
