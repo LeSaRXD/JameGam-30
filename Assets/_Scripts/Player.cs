@@ -14,10 +14,11 @@ public class Player : MonoBehaviour {
     Direction direction = Direction.Up;
 
     [Header("References")]
-    public GameObject gearPrefab;
-    public SpriteRenderer sprite;
-    public Animator animator;
     public GameObject heldGear;
+    public GameObject gearPrefab;
+
+    SpriteRenderer sprite;
+    Animator animator;
 
     [HideInInspector]
     public List<GameObject> interactables;
@@ -38,6 +39,9 @@ public class Player : MonoBehaviour {
     void Start() {
 
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+
         interactables = new List<GameObject>();
 
         HoldingGear = false;
@@ -147,8 +151,9 @@ public class Player : MonoBehaviour {
                 if(!interactable.CompareTag("Generator")) continue;
 
                 Generator generator = interactable.GetComponent<Generator>();
-                if(generator.Health < generator.maxHealth) generator.Health += fixAmount;
+                if(generator.Health > generator.maxHealth) break;
 
+                generator.Health += fixAmount;
                 HoldingGear = false;
 
                 break;

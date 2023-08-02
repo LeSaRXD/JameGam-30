@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class TimeManager : MonoBehaviour {
     
     public static TimeManager instance;
+
+    public Spawner spawner;
 
     [Header("Post Processing")]
     public Volume postProcessVolume;
@@ -15,6 +18,7 @@ public class TimeManager : MonoBehaviour {
     
     [Header("UI")]
     public GameObject deathPanel;
+    public TextMeshProUGUI resultText;
 
 	[Header("Audio")]
     public AudioSource bgmAudioSource;
@@ -26,7 +30,6 @@ public class TimeManager : MonoBehaviour {
 
     float currentPitch = 1f;
     float targetPitch = 1f;
-
 
     
     void Start() {
@@ -48,6 +51,8 @@ public class TimeManager : MonoBehaviour {
 
         UpdateTimeScale(0f);
         deathPanel.SetActive(true);
+
+        resultText.text = "You survived " + (spawner.waveNumber - 1).ToString() + " waves!";
 
     }
 

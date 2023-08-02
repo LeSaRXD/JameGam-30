@@ -14,13 +14,12 @@ public class Spawner : MonoBehaviour {
     public Transform enemyTarget;
     public Transform enemies;
 
-    // UI
+    [Header("UI")]
     public TextMeshProUGUI waveCounter;
     public TextMeshProUGUI waveExecution;
     public Animation completeAnimation;
 
-    float waveStartTime;
-    int waveNumber = 1;
+    public int waveNumber = 1;
 
 
 
@@ -36,7 +35,7 @@ public class Spawner : MonoBehaviour {
 
             waveCounter.text = "Wave " + waveNumber;
 
-            waveStartTime = Time.time;
+            float waveStartTime = Time.time;
 
             int enemyCount = GetEnemyCount(waveNumber);
             for(int i = 0; i < enemyCount; i++) Spawn();
@@ -52,6 +51,7 @@ public class Spawner : MonoBehaviour {
             yield return new WaitForSeconds(timeBetweenWaves);
 
             waveNumber++;
+            
 
 		}
 
