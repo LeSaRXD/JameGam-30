@@ -543,7 +543,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -554,7 +554,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1.5}
+  m_Size: {x: 5, y: 1.75}
   m_EdgeRadius: 0
 --- !u!4 &167136563
 Transform:
@@ -1038,7 +1038,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.1}
@@ -1049,7 +1049,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4, y: 0.8}
   m_EdgeRadius: 0
 --- !u!95 &558158086
 Animator:
@@ -1798,7 +1798,6 @@ GameObject:
   m_Component:
   - component: {fileID: 916786959}
   - component: {fileID: 916786962}
-  - component: {fileID: 916786961}
   - component: {fileID: 916786963}
   m_Layer: 0
   m_Name: Clock
@@ -1824,32 +1823,6 @@ Transform:
   m_Father: {fileID: 167136563}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &916786961
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 916786958}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!212 &916786962
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2016,6 +1989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1081749008}
   - component: {fileID: 1081749009}
+  - component: {fileID: 1081749010}
   m_Layer: 0
   m_Name: MinuteHand
   m_TagString: Untagged
@@ -2030,7 +2004,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081749007}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2090,6 +2064,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1081749010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081749007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ee4e7052fdaaa4188cc759b64d3766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreesPerMinute: 6
 --- !u!1 &1143690432
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,7 +2183,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11.78125
+  orthographic size: 9.078125
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -3376,6 +3363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2042249632}
   - component: {fileID: 2042249633}
+  - component: {fileID: 2042249634}
   m_Layer: 0
   m_Name: SecondHand
   m_TagString: Untagged
@@ -3450,6 +3438,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2042249634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042249631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ee4e7052fdaaa4188cc759b64d3766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreesPerMinute: 360
 --- !u!1 &2085556641
 GameObject:
   m_ObjectHideFlags: 0
