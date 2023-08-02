@@ -40,6 +40,8 @@ public class Enemy : MonoBehaviour {
 
     void Update() {
 
+        if(GameSettings.paused) return;
+
         bool isRunning = generator == null;
 
         if(damaging || dying) return;
